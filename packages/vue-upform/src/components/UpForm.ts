@@ -1,8 +1,8 @@
-import { defineComponent, provide, unref } from 'vue'
-import { renderForm } from '../form'
+import { defineComponent, provide } from 'vue'
+import { renderForm, createFormContext } from '../form'
 
 export default defineComponent({
-  name: 'UpForm',
+  name: 'Upform',
   props: {
     name: {
       type: String,
@@ -18,20 +18,10 @@ export default defineComponent({
     },
   },
 
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'submit', 'reset'],
 
-  setup(props, { emit }) {
-    const formContext = {
-      submit: () => {
-        console.log(Math.random())
-        console.log('submit')
-      },
-      reset: () => {
-        console.log('reset')
-      },
-      model: unref(props.modelValue),
-      emit,
-    }
+  setup(props, ctx) {
+    const formContext = createFormContext(props.modelValue, ctx)
 
     provide('upform', formContext)
     return () => renderForm(props.name, formContext, props.use)

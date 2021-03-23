@@ -3,7 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/vue-upform)](https://www.npmjs.com/package/vue-upform)
 [![npm downloads](https://img.shields.io/npm/dt/vue-upform)](https://www.npmjs.com/package/vue-upform)
 
-<img src="/docs/public/vue-upform-logo.svg" alt="VueUpform logo" width="300" style="margin-top: 40px" />
+> This project is still in heavy development
+
+<img src="/docs/public/vue-upform-logo.svg" alt="VueUpform logo" width="200" style="margin-top: 40px" />
 
 # vue-upform
 
@@ -36,7 +38,9 @@ npm i vue-upform
 
 ## Quick start
 
-1. Create a form
+1. Create a form<br>
+To provide maximum flexibility, you are in charge of providing a component to render each field.<br>
+The only requirement these components need to have is to support the `v-model` directive
 
 ```js
 import { createForm } from 'vue-upform'

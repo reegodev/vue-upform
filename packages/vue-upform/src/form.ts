@@ -1,4 +1,11 @@
-import { Component, AsyncComponentLoader, h, VNode } from 'vue'
+import {
+  Component,
+  AsyncComponentLoader,
+  h,
+  VNode,
+  SetupContext,
+  unref,
+} from 'vue'
 import { getFormRenderer } from './renderer'
 import { getNestedObject } from './utils'
 
@@ -18,11 +25,12 @@ export interface FormModelConfig {
   fields: FormControl[]
 }
 
-export interface UpFormContext {
+export interface UpformContext {
   submit: () => void
   reset: () => void
-  model: Record<string, any>
+  value: Record<string, any>
   emit: (event: string, ...args: any[]) => void
+  status: Record<string, any>
 }
 
 export type FormModel = FormControl[] | FormModelConfig
@@ -44,9 +52,36 @@ export const createForm = (name: string, mod: FormModel): void => {
   models.set(name, model)
 }
 
+export const createFormContext = (
+  initialValue: Record<string, any>,
+  ctx: SetupContext<any>,
+): UpformContext => {
+  const formContext = {
+    submit: () => {
+      ctx.emit('submit', {
+        payload: formContext.value,
+        status: formContext.status,
+      })
+    },
+    reset: () => {
+      ctx.emit('reset')
+    },
+    value: unref(initialValue),
+    status: {
+      pristine: true,
+      touched: false,
+      valid: true,
+      invalid: false,
+      loading: false,
+    },
+    emit: ctx.emit,
+  }
+  return formContext
+}
+
 export const renderForm = (
   name: string,
-  context: UpFormContext,
+  context: UpformContext,
   formRenderer: string = null,
 ): VNode => {
   if (!models.has(name)) {
@@ -62,10 +97,12 @@ export const renderForm = (
       class: 'upform-form',
       onSubmit(event: Event) {
         event.preventDefault()
+        event.stopPropagation()
         context.submit()
       },
       onReset(event: Event) {
         event.preventDefault()
+        event.stopPropagation()
         context.reset()
       },
     },
@@ -89,7 +126,7 @@ export const renderForm = (
 
 export const renderControl = (
   control: FormControl,
-  context: UpFormContext,
+  context: UpformContext,
   rendererName: string = null,
   path: string = null,
 ): VNode => {
@@ -108,7 +145,7 @@ export const renderControl = (
   }
 
   const attributes = Object.assign({}, control.props || {})
-  const currentModelValue = getNestedObject(context.model, path)
+  const currentModelValue = getNestedObject(context.value, path)
 
   // Set the initial value on the model if its missing
   if (
@@ -122,7 +159,7 @@ export const renderControl = (
         typeof control.initialValue !== 'undefined' ? control.initialValue : ''
     }
 
-    context.emit('update:modelValue', context.model)
+    context.emit('update:modelValue', context.value)
   }
 
   // Add v-model support to leaf components
@@ -130,7 +167,7 @@ export const renderControl = (
     attributes.modelValue = currentModelValue[control.name]
     attributes['onUpdate:modelValue'] = (value) => {
       currentModelValue[control.name] = value
-      context.emit('update:modelValue', context.model)
+      context.emit('update:modelValue', context.value)
     }
   }
 

@@ -1,7 +1,13 @@
-import { createForm, models, renderControl, renderForm } from '../src/form'
+import {
+  createForm,
+  models,
+  renderControl,
+  renderForm,
+  UpformContext,
+} from '../src/form'
 import { Component, defineComponent, h } from 'vue'
 
-const createFormContext = (model = {}) => {
+const createFormContext = (value = {}): UpformContext => {
   return {
     submit: () => {
       //
@@ -12,7 +18,8 @@ const createFormContext = (model = {}) => {
     emit: (event: string) => {
       //
     },
-    model,
+    value,
+    status: {},
   }
 }
 
