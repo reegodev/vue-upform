@@ -1,6 +1,6 @@
 {
   "name": "vue-upform",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Boost form development to the next level with declarative and reusable form definitions.",
   "author": "Matteo Rigon",
   "homepage": "https://github.com/reegodev/vue-upform#readme",
