@@ -1,3 +1,8 @@
+[![Build Status](https://img.shields.io/badge/vue-3.x-brightgreen.svg)](https://img.shields.io/badge/vue-3.x.x-brightgreen.svg)
+[![Build Status](https://github.com/reegodev/vue-upform/workflows/Node.js%20CI/badge.svg)](https://github.com/reegodev/vue-upform/actions)
+[![npm version](https://img.shields.io/npm/v/vue-upform)](https://www.npmjs.com/package/vue-upform)
+[![npm downloads](https://img.shields.io/npm/dm/vue-upform)](https://www.npmjs.com/package/vue-upform)
+
 # vue-upform
 
 Boost form development to the next level with declarative and reusable form definitions.<br><br>
