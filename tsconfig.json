@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["ES6", "dom"]
+  },
+  "include": ["packages/**/src/**/*"],
+  "exclude": ["node_modules", "dist", "rollup.config.js"],
+  "types" : ["jest"],
+  "typeAcquisition": { "include": ["jest"] }
+}

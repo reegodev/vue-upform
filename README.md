@@ -1,6 +1,7 @@
 # vue-upform
 
-Boost form development to the next level with declarative and reusable form definitions.
+Boost form development to the next level with declarative and reusable form definitions.<br><br>
+This project aims to make Vue form development fast and scalable, without enforcing specific design or business logic constraints.
 
 ## Table of contents
 
@@ -10,12 +11,12 @@ Boost form development to the next level with declarative and reusable form defi
 
 ## Features
 
-- 🎨 &nbsp; Declarative form rendering
-- 📝 &nbsp; Declarative form model definition 
+- 📝 &nbsp; Declarative form model definition
+- 🎨 &nbsp; Define multiple renderers to satisfy any design requirement
 - ♻︎ &nbsp; Configure once, reuse multiple times
-- ⛔️ &nbsp; Built-in universal validators
-- ✉️ &nbsp; Built-in submission handlers
-- 🎮 &nbsp; Fast prototyping with plugins for Tailwind, Bootstrap and Bulma renderers
+- ⛔️ &nbsp; [WIP] Built-in universal validators 
+- ✉️ &nbsp; [WIP] Built-in submission handlers 
+- 🎮 &nbsp; [WIP] Fast prototyping with plugins for most common UI libraries like Tailwind, Bootstrap, Bulma, etc.
 
 ## Installation
 
@@ -28,55 +29,44 @@ npm i vue-upform
 
 ## Quick start
 
-1. Configure how forms look
+1. Create a form
 
 ```js
-import { configureRenderer } from 'vue-upform'
+import { createForm } from 'vue-upform'
 import TextInput from '~/components/TextInput.vue'
 import PasswordInput from '~/components/PasswordInput.vue'
 import CheckboxInput from '~/components/CheckboxInput.vue'
 import SubmitButton from '~/components/SubmitButton.vue'
 
-configureRenderer({
-  text: TextInput,
-  password: TextInput,
-  checkbox: CheckboxInput,
-  submit: SubmitButton,
-})
-```
-
-2. Register a form
-
-```js
-import { registerForm } from 'vue-upform'
-
-registerForm('login', [
+createForm('login', [
   {
-    type: 'text'.
+    as: TextInput,
     name: 'email',
-    props: { placeholder: 'Username' },
-    validations: 'required|email',
+    props: { placeholder: 'Email' },
+    rules: 'required|email',
   },
   {
-    type: 'password'.
+    as: TextInput,
     name: 'password',
-    props: { placeholder: 'password' },
-    validations: 'required',
+    props: { type: 'password', placeholder: 'password' },
+    rules: 'required',
   },
   {
-    type: 'checkbox'.
+    as: CheckboxInput,
     name: 'rememberMe',
+    initialValue: true,
     props: { label: 'Remember me on this device' },
-    validations: 'boolean',
+    rules: 'boolean',
   },
   {
-    type: 'submit',
+    as: SubmitButton,
+    static: true,
     props: { label: 'Login' }, 
   },
 ])
 ```
 
-3. Use the form you just registered
+2. Use the form you just registered inside another component
 
 ```vue
 <!-- Login.vue -->
