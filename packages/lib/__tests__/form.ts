@@ -163,7 +163,7 @@ describe('form', () => {
       }
     })
 
-    it('populates the form model with initial data', () => {
+    it('populates the form model with empty data', () => {
       const model = {}
 
       const vnode = renderControl(
@@ -188,8 +188,8 @@ describe('form', () => {
 
       expect(model).toMatchObject({
         test: {
-          subtest: '',
-          subtes2: '',
+          subtest: null,
+          subtes2: null,
         },
       })
     })

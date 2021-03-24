@@ -10,13 +10,12 @@ import { getFormRenderer } from './renderer'
 import { getNestedObject } from './utils'
 
 export interface FormControl {
-  name: string
+  name?: string
   as: string | Component | AsyncComponentLoader
   initialValue?: any
   props?: Record<string, any>
   rules?: string
   children?: FormControl[]
-  static?: boolean
 }
 
 export interface FormModelConfig {
@@ -147,23 +146,23 @@ export const renderControl = (
   const attributes = Object.assign({}, control.props || {})
   const currentModelValue = getNestedObject(context.value, path)
 
+  // Only controls with a name handle values
+  const handlesValues = !!control.name
+
   // Set the initial value on the model if its missing
-  if (
-    typeof currentModelValue[control.name] === 'undefined' &&
-    !control.static
-  ) {
+  if (handlesValues && typeof currentModelValue[control.name] === 'undefined') {
     if (control.children) {
       currentModelValue[control.name] = {}
     } else {
       currentModelValue[control.name] =
-        typeof control.initialValue !== 'undefined' ? control.initialValue : ''
+        typeof control.initialValue !== 'undefined' ? control.initialValue : null
     }
 
     context.emit('update:modelValue', context.value)
   }
 
-  // Add v-model support to leaf components
-  if (!control.children) {
+  // Add v-model support to dynamic leaf components
+  if (handlesValues && !control.children) {
     attributes.modelValue = currentModelValue[control.name]
     attributes['onUpdate:modelValue'] = (value) => {
       currentModelValue[control.name] = value

@@ -5,7 +5,7 @@ module.exports = {
       "node": true
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", 'plugin:vue/vue3-recommended'],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -14,9 +14,10 @@ module.exports = {
   ],
   ignorePatterns: [
     "/**/dist/*.js",
-    "/**/dist/**.d.ts",
+    "/**/dist/*.d.ts",
     "rollup.config.js",
     ".eslintrc.js",
+    "/**/*.html",
   ],
   rules: {
     "prettier/prettier": "error",

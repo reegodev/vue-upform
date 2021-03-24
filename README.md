@@ -3,13 +3,13 @@
 [![npm version](https://img.shields.io/npm/v/vue-upform)](https://www.npmjs.com/package/vue-upform)
 [![npm downloads](https://img.shields.io/npm/dt/vue-upform)](https://www.npmjs.com/package/vue-upform)
 
-> This project is still in heavy development
+> HEADS-UP! This project is still in heavy development
 
-<img src="/docs/public/vue-upform-logo.svg" alt="VueUpform logo" width="200" style="margin-top: 40px" />
+<img src="/docs/public/vue-upform-logo.svg" alt="VueUpform logo" width="150" style="margin-top: 40px" />
 
 # vue-upform
 
-Boost form development to the next level with declarative and reusable form definitions.<br><br>
+📝 ⚡️ Boost Vue form development to the next level with declarative and reusable form definitions.<br><br>
 This project aims to make Vue form development fast and scalable, without enforcing specific design or business logic constraints.
 
 ## Table of contents
@@ -71,7 +71,6 @@ createForm('login', [
   },
   {
     as: SubmitButton,
-    static: true,
     props: { label: 'Login' }, 
   },
 ])
@@ -82,13 +81,15 @@ createForm('login', [
 ```vue
 <!-- Login.vue -->
 <template>
-  <UpForm name="login" @submit="handleSubmit" />
+  <Upform name="login" @submit="handleSubmit" />
 </template>
 <script>
+import { Upform } from 'vue-upform'
 export default {
+  components: { Upform },
   setup() {
     return {
-      handleSubmit({ payload, form }) {
+      handleSubmit({ payload, status }) {
         // handle your submission
       }
     }
