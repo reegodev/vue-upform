@@ -1,5 +1,5 @@
-import { defineComponent, provide } from 'vue'
-import { renderForm, createFormContext } from '../form'
+import { defineComponent, provide, SetupContext, EmitsOptions } from 'vue'
+import { Form } from '../FormInstance'
 
 export default defineComponent({
   name: 'Upform',
@@ -8,22 +8,25 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    use: {
+    renderer: {
       type: String,
       default: null,
     },
     modelValue: {
       type: Object,
-      default: () => ({}),
+      default: null,
     },
   },
 
   emits: ['update:modelValue', 'submit', 'reset'],
 
   setup(props, ctx) {
-    const formContext = createFormContext(props.modelValue, ctx)
+    const form = new Form({
+      name: props.name,
+      renderer: props.renderer,
+      initialValue: props.modelValue,
+    }, ctx as SetupContext<EmitsOptions>)
 
-    provide('upform', formContext)
-    return () => renderForm(props.name, formContext, props.use)
+    return () => form.render()
   },
 })

@@ -5,6 +5,9 @@ import SubmitButtonVariant from './SubmitButtonVariant.vue'
 import TextInput from './TextInput.vue'
 import TextInputVariant from './TextInputVariant.vue'
 import Title from './Title.vue'
+import Group from './Group.vue'
+import Row from './Row.vue'
+import Col from './Col.vue'
 
 export {
   CheckInput,
@@ -14,4 +17,7 @@ export {
   TextInputVariant,
   SubmitButtonVariant,
   Title,
+  Group,
+  Row,
+  Col,
 }

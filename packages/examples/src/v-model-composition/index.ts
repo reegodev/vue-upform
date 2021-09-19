@@ -1,6 +1,6 @@
-import { createApp, defineComponent } from 'vue'
+import { createApp, defineComponent, ref } from 'vue'
 import { createForm, Upform } from 'vue-upform'
-import { TextInput, SubmitButton } from '../components'
+import { TextInput, SubmitButton } from '../../components'
 
 createForm('login', [
   {
@@ -26,12 +26,14 @@ createApp({
   components: {
     Upform,
   },
-  data() {
+  setup() {
+    const model = ref({
+      email: 'me@domain.com',
+      password: 'pass',
+    })
+
     return {
-      model: {
-        email: 'asd',
-        password: 'asdasd',
-      },
+      model,
     }
   },
 }).mount('#app')

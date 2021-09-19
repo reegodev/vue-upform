@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["ES6", "dom"]
+    "lib": ["ES6", "dom"],
+    "target": "es5"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "rollup.config.js"],

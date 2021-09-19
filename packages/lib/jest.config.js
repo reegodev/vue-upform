@@ -8,4 +8,7 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   testEnvironment: 'node',
+  collectCoverage: true,
+  coveragePathIgnorePatterns: [],
+  coverageReporters: ['lcov', 'html', 'text'],
 }

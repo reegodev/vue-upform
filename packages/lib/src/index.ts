@@ -1,7 +1,7 @@
 import { createFormRenderer, getFormRenderer } from './renderer'
-import { createForm, renderForm, UpformContext } from './form'
+import { createForm } from './config'
 import Upform from './components/UpForm'
 
 export { createFormRenderer, getFormRenderer }
-export { createForm, renderForm, UpformContext }
+export { createForm, }
 export { Upform }

@@ -11,6 +11,7 @@ describe('utils', () => {
         },
       }
 
+      expect(getNestedObject(obj)).toEqual(obj)
       expect(getNestedObject(obj, null)).toEqual(obj)
     })
 

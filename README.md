@@ -12,12 +12,6 @@
 📝 ⚡️ Boost Vue form development to the next level with declarative and reusable form definitions.<br><br>
 This project aims to make Vue form development fast and scalable, without enforcing specific design or business logic constraints.
 
-## Table of contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Quick start](#quick-start)
-
 ## Features
 
 - 📝 &nbsp; Declarative form model definition

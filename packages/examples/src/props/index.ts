@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createForm, Upform } from 'vue-upform'
-import { TextInput, CheckInput, SubmitButton } from '../components'
+import { TextInput, CheckInput, SubmitButton } from '../../components'
 
 createForm('login', [
   {
