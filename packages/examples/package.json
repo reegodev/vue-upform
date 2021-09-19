@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "cd src && vite",
-    "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
