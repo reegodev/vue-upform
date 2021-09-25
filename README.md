@@ -2,6 +2,7 @@
 [![Build Status](https://github.com/reegodev/vue-upform/workflows/Node.js%20CI/badge.svg)](https://github.com/reegodev/vue-upform/actions)
 [![npm version](https://img.shields.io/npm/v/vue-upform)](https://www.npmjs.com/package/vue-upform)
 [![npm downloads](https://img.shields.io/npm/dt/vue-upform)](https://www.npmjs.com/package/vue-upform)
+[![codecov](https://codecov.io/gh/reegodev/vue-upform/branch/main/graph/badge.svg?token=9DYKMRDR3K)](https://codecov.io/gh/reegodev/vue-upform)
 
 > HEADS-UP! This project is still in heavy development
 
@@ -43,31 +44,34 @@ import PasswordInput from '~/components/PasswordInput.vue'
 import CheckboxInput from '~/components/CheckboxInput.vue'
 import SubmitButton from '~/components/SubmitButton.vue'
 
-createForm('login', [
-  {
-    as: TextInput,
-    name: 'email',
-    props: { placeholder: 'Email' },
-    rules: 'required|email',
-  },
-  {
-    as: TextInput,
-    name: 'password',
-    props: { type: 'password', placeholder: 'password' },
-    rules: 'required',
-  },
-  {
-    as: CheckboxInput,
-    name: 'rememberMe',
-    initialValue: true,
-    props: { label: 'Remember me on this device' },
-    rules: 'boolean',
-  },
-  {
-    as: SubmitButton,
-    props: { label: 'Login' }, 
-  },
-])
+createForm({
+  name:'login',
+  fields: [
+    {
+      as: TextInput,
+      name: 'email',
+      props: { placeholder: 'Email' },
+      rules: 'required|email',
+    },
+    {
+      as: TextInput,
+      name: 'password',
+      props: { type: 'password', placeholder: 'password' },
+      rules: 'required',
+    },
+    {
+      as: CheckboxInput,
+      name: 'rememberMe',
+      initialValue: true,
+      props: { label: 'Remember me on this device' },
+      rules: 'boolean',
+    },
+    {
+      as: SubmitButton,
+      props: { label: 'Login' }, 
+    },
+  ]
+})
 ```
 
 2. Use the form you just registered inside another component
@@ -92,5 +96,7 @@ export default {
 </script>
 ```
 
+## License
 
+MIT
 

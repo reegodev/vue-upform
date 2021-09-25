@@ -24,12 +24,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
     - run: npm install -g lerna start-server-and-test
     - run: yarn install --frozen-lockfile
     - run: lerna bootstrap
     - run: lerna run build --stream
     - run: lerna run test --stream
+
+    - name: Coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
