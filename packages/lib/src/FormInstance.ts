@@ -116,7 +116,7 @@ export class Form {
         control.children.forEach(child => {
           createNestedValue(child, (control.name ? parentValue[control.name] : parentValue) as FormModelValue)
         })
-      } else if (typeof parentValue[control.name] === 'undefined') {
+      } else if (control.name && typeof parentValue[control.name] === 'undefined') {
         parentValue[control.name] = control.initialValue ?? null
       }
     }

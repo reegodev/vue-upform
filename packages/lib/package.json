@@ -21,7 +21,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "coverage:show": "open coverage/index.html"
   },
   "bugs": {
     "url": "https://github.com/reegodev/vue-upform/issues"

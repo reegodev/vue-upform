@@ -63,7 +63,13 @@ const alternateInputComponent = defineComponent({
   `
 })
 
+const dummyComponent = defineComponent({
+  template: `<div></div>`
+})
 
+const wrapperComponent = defineComponent({
+  template: `<div><slot /></div>`
+})
 
 const basicGroupComponent = defineComponent({
   props: {
@@ -197,6 +203,32 @@ describe('UpForm component', () => {
               },
             },
           ]
+        },
+        {
+          as: basicGroupComponent,
+          name: 'depth1',
+          children: [
+            {
+              name: 'depth1_input1',
+              as: basicInputComponent,
+              props: {
+                name: 'depth1_input1',
+              },
+            },
+            {
+              name: 'depth1_input2',
+              as: basicInputComponent,
+              props: {
+                name: 'depth1_input2',
+              },
+            },
+            {
+              as: dummyComponent,
+            },
+          ]
+        },
+        {
+          as: dummyComponent,
         }
       ]
     })
@@ -206,19 +238,30 @@ describe('UpForm component', () => {
         name: 'test1',
         modelValue: {
           input1: 'test1',
-          input2: 'test2',
-          subInput1: 'test3',
-          subInput2: 'test4',
+          subInput1: 'test3'
         },
       }
     })
 
     const input1 = wrapper.get('input[name="input1"]')
+    const subInput1 = wrapper.get('input[name="subInput1"]')
     await input1.setValue('test1-updated')
+    await subInput1.setValue('test3-updated')
 
     const updateEvent = wrapper.emitted('update:modelValue')
-    expect(updateEvent).toHaveLength(1)
-    expect(updateEvent[0][0].input1).toEqual('test1-updated')
+    expect(updateEvent).toHaveLength(2)
+    expect(Object.keys(updateEvent[0][0]).sort((a, b) => a.localeCompare(b))).toEqual(['input1', 'input2', 'subInput1', 'subInput2', 'depth1'].sort((a, b) => a.localeCompare(b)))
+    expect(Object.keys(updateEvent[0][0].depth1)).toEqual(['depth1_input1', 'depth1_input2'])
+    expect(updateEvent[1][0]).toEqual({
+      input1: 'test1-updated',
+      input2: null,
+      subInput1: 'test3-updated',
+      subInput2: null,
+      depth1: {
+        depth1_input1: null,
+        depth1_input2: null,
+      }
+    })
   })
 
   it('allows specifying a custom renderer', () => {
