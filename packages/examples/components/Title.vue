@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text-md uppercase">{{ text }}</h2>
+  <h2 class="text-sm uppercase font-bold mb-4">{{ text }}</h2>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

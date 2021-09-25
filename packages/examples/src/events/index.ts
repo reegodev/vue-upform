@@ -1,6 +1,6 @@
 import { createApp, defineComponent } from 'vue'
 import { createForm, Upform } from 'vue-upform'
-import { TextInput, SubmitButton } from '../../components'
+import { TextInput, SubmitButton, ResetButton } from '../../components'
 
 createForm({
   name: 'login', 
@@ -15,6 +15,10 @@ createForm({
       props: { type: 'password' },
     },
     {
+      as: ResetButton,
+      props: { label: 'Reset' },
+    },
+    {
       as: SubmitButton,
       props: { label: 'Login' },
     },
@@ -23,7 +27,7 @@ createForm({
 
 createApp({
   template: `<div id="#app">
-    <Upform name="login" v-model="model" class="bg-white p-4 rounded shadow-sm max-w-md" />
+    <Upform name="login" @reset="onReset" @submit="onSubmit" class="bg-white p-4 rounded shadow-sm max-w-md" />
     <pre id="output">{{ model }}</pre>
   </div>`,
   components: {
@@ -32,9 +36,17 @@ createApp({
   data() {
     return {
       model: {
-        email: 'asd',
-        password: 'asdasd',
+        '@reset': null,
+        '@submit': null,
       },
     }
   },
+  methods: {
+    onReset(event: any) {
+      this.model['@reset'] = event
+    },
+    onSubmit(event: any) {
+      this.model['@submit'] = event
+    }
+  }
 }).mount('#app')

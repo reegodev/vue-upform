@@ -2,21 +2,24 @@ import { createApp, defineComponent, ref } from 'vue'
 import { createForm, Upform } from 'vue-upform'
 import { TextInput, SubmitButton } from '../../components'
 
-createForm('login', [
-  {
-    as: TextInput,
-    name: 'email',
-  },
-  {
-    as: TextInput,
-    name: 'password',
-    props: { type: 'password' },
-  },
-  {
-    as: SubmitButton,
-    props: { label: 'Login' },
-  },
-])
+createForm({
+  name: 'login',
+  fields: [
+    {
+      as: TextInput,
+      name: 'email',
+    },
+    {
+      as: TextInput,
+      name: 'password',
+      props: { type: 'password' },
+    },
+    {
+      as: SubmitButton,
+      props: { label: 'Login' },
+    },
+  ]
+})
 
 createApp({
   template: `<div id="#app">

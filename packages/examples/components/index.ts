@@ -8,6 +8,7 @@ import Title from './Title.vue'
 import Group from './Group.vue'
 import Row from './Row.vue'
 import Col from './Col.vue'
+import ResetButton from './ResetButton.vue'
 
 export {
   CheckInput,
@@ -20,4 +21,5 @@ export {
   Group,
   Row,
   Col,
+  ResetButton,
 }

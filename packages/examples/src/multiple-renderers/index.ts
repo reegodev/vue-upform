@@ -14,31 +14,35 @@ createFormRenderer('outline', {
   'submit': SubmitButtonVariant,
 })
 
-createForm('login', [
-  {
-    as: 'text',
-    name: 'email',
-    props: {
-      placeholder: 'Email'
-    }
-  },
-  {
-    as: 'text',
-    name: 'password',
-    props: { placeholder: 'Password', type: 'password' },
-  },
-  {
-    as: 'check',
-    name: 'rememberMe',
-    props: { label: 'Remember me on this device' },
-  },
-  {
-    as: 'submit',
-    props: { label: 'Login' },
-  },
-])
+createForm({
+  name: 'login', 
+  fields: [
+    {
+      as: 'text',
+      name: 'email',
+      props: {
+        placeholder: 'Email'
+      }
+    },
+    {
+      as: 'text',
+      name: 'password',
+      props: { placeholder: 'Password', type: 'password' },
+    },
+    {
+      as: 'check',
+      name: 'rememberMe',
+      props: { label: 'Remember me on this device' },
+    },
+    {
+      as: 'submit',
+      props: { label: 'Login' },
+    },
+  ]
+})
 
-createForm('payment', {
+createForm({
+  name: 'payment',
   renderer: 'outline',
   fields: [
     {
@@ -76,7 +80,7 @@ createApp({
       </div>
       <div class="w-1/3 max-w-md">
         <h2 class="mb-2 text-xs font-medium uppercase">Outline renderer</h2>
-        <Upform name="login" use="outline" class="bg-white p-4 rounded shadow-sm renderer-outline" />
+        <Upform name="login" renderer="outline" class="bg-white p-4 rounded shadow-sm renderer-outline" />
       </div>
       <div class="w-1/3 max-w-md">
         <h2 class="mb-2 text-xs font-medium uppercase">Outline renderer with submit override</h2>
